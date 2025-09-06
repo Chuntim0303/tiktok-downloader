@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Home = () => {
   const [url, setUrl] = useState('');
@@ -10,6 +10,21 @@ const Home = () => {
 
   // API endpoint from environment variables
   const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
+
+  // Google Analytics tracking function
+  const trackEvent = (eventName, parameters = {}) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', eventName, parameters);
+    }
+  };
+
+  // Track page view on component mount
+  useEffect(() => {
+    trackEvent('page_view', {
+      page_title: 'TikTok Downloader',
+      page_location: window.location.href
+    });
+  }, []);
 
   // CORS proxies for client-side downloads
   const corsProxies = [
@@ -30,18 +45,35 @@ const Home = () => {
   };
 
   const handleDownload = async () => {
+    // Track download attempt
+    trackEvent('download_started', {
+      event_category: 'engagement'
+    });
+
     if (!API_ENDPOINT) {
       setError('Service temporarily unavailable. Please try again later.');
+      trackEvent('download_error', {
+        event_category: 'error',
+        error_type: 'no_api_endpoint'
+      });
       return;
     }
 
     if (!url.trim()) {
       setError('Please enter a TikTok URL');
+      trackEvent('download_error', {
+        event_category: 'error',
+        error_type: 'empty_url'
+      });
       return;
     }
 
     if (!validateTikTokUrl(url)) {
       setError('Please enter a valid TikTok URL');
+      trackEvent('download_error', {
+        event_category: 'error',
+        error_type: 'invalid_url'
+      });
       return;
     }
 
@@ -68,6 +100,13 @@ const Home = () => {
         } catch {
           errorMessage = 'Server error. Please try again later.';
         }
+        
+        trackEvent('download_error', {
+          event_category: 'error',
+          error_type: 'server_error',
+          status_code: response.status
+        });
+        
         throw new Error(errorMessage);
       }
 
@@ -78,6 +117,10 @@ const Home = () => {
         const data = await response.json();
         
         if (data.error) {
+          trackEvent('download_error', {
+            event_category: 'error',
+            error_type: 'api_error'
+          });
           throw new Error(data.error);
         }
 
@@ -89,8 +132,18 @@ const Home = () => {
             videoUrl: data.videoUrl
           });
 
+          trackEvent('video_extracted', {
+            event_category: 'success',
+            has_title: !!(data.title && data.title !== 'TikTok Video'),
+            has_author: !!data.author
+          });
+
           await attemptClientDownload(data.videoUrl, data.title || 'TikTok Video');
         } else {
+          trackEvent('download_error', {
+            event_category: 'error',
+            error_type: 'invalid_response'
+          });
           throw new Error('Invalid response from server');
         }
       } 
@@ -99,6 +152,10 @@ const Home = () => {
         const blob = await response.blob();
         
         if (blob.size === 0) {
+          trackEvent('download_error', {
+            event_category: 'error',
+            error_type: 'empty_file'
+          });
           throw new Error('Received empty video file');
         }
 
@@ -116,8 +173,18 @@ const Home = () => {
         const filename = createFilename(title, url);
         downloadBlob(blob, filename);
         setDownloadReady(true);
+
+        trackEvent('download_completed', {
+          event_category: 'success',
+          download_method: 'server_side',
+          file_size_mb: (blob.size / 1024 / 1024).toFixed(1)
+        });
         
       } else {
+        trackEvent('download_error', {
+          event_category: 'error',
+          error_type: 'unexpected_response'
+        });
         throw new Error('Unexpected response from server');
       }
     } catch (err) {
@@ -139,6 +206,12 @@ const Home = () => {
           const filename = createFilename(title, url);
           downloadBlob(blob, filename);
           setDownloadReady(true);
+          
+          trackEvent('download_completed', {
+            event_category: 'success',
+            download_method: 'direct',
+            file_size_mb: (blob.size / 1024 / 1024).toFixed(1)
+          });
           return;
         }
       }
@@ -159,6 +232,12 @@ const Home = () => {
             const filename = createFilename(title, url);
             downloadBlob(blob, filename);
             setDownloadReady(true);
+            
+            trackEvent('download_completed', {
+              event_category: 'success',
+              download_method: `proxy_${i + 1}`,
+              file_size_mb: (blob.size / 1024 / 1024).toFixed(1)
+            });
             return;
           }
         }
@@ -170,6 +249,11 @@ const Home = () => {
     // All automatic methods failed, show manual options
     setShowManualOptions(true);
     setError('Download blocked by your browser. Please use the alternative download option below.');
+    
+    trackEvent('download_fallback', {
+      event_category: 'engagement',
+      fallback_type: 'manual_options'
+    });
   };
 
   // Download from blob (for binary responses)
@@ -224,12 +308,22 @@ const Home = () => {
   };
 
   const handleManualDownload = () => {
+    trackEvent('manual_download_used', {
+      event_category: 'engagement',
+      action_type: 'open_video'
+    });
+    
     if (videoInfo?.videoUrl) {
       window.open(videoInfo.videoUrl, '_blank');
     }
   };
 
   const handleCopyUrl = () => {
+    trackEvent('manual_download_used', {
+      event_category: 'engagement',
+      action_type: 'copy_url'
+    });
+    
     if (videoInfo?.videoUrl) {
       navigator.clipboard.writeText(videoInfo.videoUrl).then(() => {
         // Create a temporary success message
@@ -243,6 +337,10 @@ const Home = () => {
   };
 
   const resetForm = () => {
+    trackEvent('form_reset', {
+      event_category: 'engagement'
+    });
+    
     setUrl('');
     setError('');
     setDownloadReady(false);
