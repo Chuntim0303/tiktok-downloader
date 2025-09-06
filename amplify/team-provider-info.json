@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tiktokdownloader-dev-ad20a-authRole",
+      "UnauthRoleArn": "arn:aws:iam::061410563581:role/amplify-tiktokdownloader-dev-ad20a-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::061410563581:role/amplify-tiktokdownloader-dev-ad20a-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-tiktokdownloader-dev-ad20a-deployment",
+      "UnauthRoleName": "amplify-tiktokdownloader-dev-ad20a-unauthRole",
+      "StackName": "amplify-tiktokdownloader-dev-ad20a",
+      "StackId": "arn:aws:cloudformation:us-east-1:061410563581:stack/amplify-tiktokdownloader-dev-ad20a/2f201320-8b6e-11f0-8b7a-0eef54a359cf",
+      "AmplifyAppId": "d1uybshcxrgvei"
+    }
+  }
+}
