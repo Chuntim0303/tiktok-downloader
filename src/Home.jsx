@@ -353,21 +353,21 @@ const Home = () => {
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Download TikTok Videos
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500">
               Fast & Free
             </span>
           </h1>
-          <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
             Save your favorite TikTok videos in high quality. No watermarks, no hassle. 
             Perfect for content creators and personal use.
           </p>
 
           {/* Download Section */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+          <div className="bg-gray-800/50 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-700/50">
             <div className="mb-6">
-              <label htmlFor="tiktok-url" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="tiktok-url" className="block text-sm font-medium text-gray-300 mb-2">
                 Enter TikTok URL
               </label>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -377,14 +377,14 @@ const Home = () => {
                   value={url}
                   onChange={handleInputChange}
                   placeholder="https://www.tiktok.com/@username/video/1234567890"
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition-all"
+                  className="flex-1 px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition-all text-white placeholder-gray-400"
                   disabled={loading}
                 />
                 <div className="flex gap-2">
                   <button
                     onClick={handleDownload}
                     disabled={loading || !url.trim() || !API_ENDPOINT}
-                    className="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold rounded-lg hover:from-pink-600 hover:to-purple-700 focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    className="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold rounded-lg hover:from-pink-600 hover:to-purple-700 focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                   >
                     {loading ? (
                       <div className="flex items-center space-x-2">
@@ -402,7 +402,7 @@ const Home = () => {
                   {(videoInfo || error || downloadReady || showManualOptions) && (
                     <button
                       onClick={resetForm}
-                      className="px-4 py-3 text-gray-600 hover:text-gray-800 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors"
+                      className="px-4 py-3 text-gray-300 hover:text-white font-medium rounded-lg border border-gray-600 hover:bg-gray-700 transition-colors"
                     >
                       New Video
                     </button>
@@ -413,19 +413,19 @@ const Home = () => {
 
             {/* Error Message */}
             {error && (
-              <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <div className="mb-4 p-4 bg-red-900/30 border border-red-700/50 rounded-lg backdrop-blur-sm">
                 <div className="flex items-center">
-                  <svg className="w-5 h-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                   </svg>
-                  <p className="text-red-800 text-sm">{error}</p>
+                  <p className="text-red-300 text-sm">{error}</p>
                 </div>
               </div>
             )}
 
             {/* Video Info */}
             {videoInfo && (
-              <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <div className="mb-4 p-4 bg-blue-900/30 border border-blue-700/50 rounded-lg backdrop-blur-sm">
                 <div className="flex items-start gap-4">
                   {videoInfo.thumbnail && (
                     <img 
@@ -435,16 +435,16 @@ const Home = () => {
                     />
                   )}
                   <div className="flex-1">
-                    <h4 className="font-medium text-blue-800 mb-2">Video Ready</h4>
-                    <div className="text-sm text-blue-700 space-y-1">
+                    <h4 className="font-medium text-blue-300 mb-2">Video Ready</h4>
+                    <div className="text-sm text-blue-200 space-y-1">
                       {videoInfo.title && videoInfo.title !== 'TikTok Video' && (
                         <p className="font-medium">{videoInfo.title}</p>
                       )}
                       {videoInfo.author && (
-                        <p className="text-blue-600">by {videoInfo.author}</p>
+                        <p className="text-blue-300">by {videoInfo.author}</p>
                       )}
                       {videoInfo.fileSize && (
-                        <p className="text-blue-600">{videoInfo.fileSize} MB</p>
+                        <p className="text-blue-300">{videoInfo.fileSize} MB</p>
                       )}
                     </div>
                   </div>
@@ -454,9 +454,9 @@ const Home = () => {
 
             {/* Manual Download Options */}
             {showManualOptions && videoInfo && (
-              <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                <h4 className="font-medium text-yellow-800 mb-3">Alternative Download</h4>
-                <p className="text-yellow-700 text-sm mb-4">
+              <div className="mb-4 p-4 bg-yellow-900/30 border border-yellow-700/50 rounded-lg backdrop-blur-sm">
+                <h4 className="font-medium text-yellow-300 mb-3">Alternative Download</h4>
+                <p className="text-yellow-200 text-sm mb-4">
                   Your browser security settings prevent automatic downloads. Please use the direct link:
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -479,7 +479,7 @@ const Home = () => {
                     Copy Link
                   </button>
                 </div>
-                <p className="text-yellow-600 text-xs mt-3">
+                <p className="text-yellow-300 text-xs mt-3">
                   Right-click on the video and select "Save video as..." to download to your device.
                 </p>
               </div>
@@ -487,24 +487,24 @@ const Home = () => {
 
             {/* Success Message */}
             {downloadReady && (
-              <div className="mt-6 p-6 bg-green-50 border border-green-200 rounded-lg">
+              <div className="mt-6 p-6 bg-green-900/30 border border-green-700/50 rounded-lg backdrop-blur-sm">
                 <div className="text-center">
-                  <svg className="w-12 h-12 text-green-600 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-12 h-12 text-green-400 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <h3 className="text-lg font-semibold text-green-800 mb-2">Download Complete!</h3>
-                  <p className="text-green-700">
+                  <h3 className="text-lg font-semibold text-green-300 mb-2">Download Complete!</h3>
+                  <p className="text-green-200">
                     {videoInfo?.title && videoInfo.title !== 'TikTok Video'
                       ? `"${videoInfo.title}" has been saved to your device.`
                       : 'Your TikTok video has been saved to your device.'
                     }
                   </p>
                   {videoInfo?.author && (
-                    <p className="text-green-600 text-sm mt-1">
+                    <p className="text-green-300 text-sm mt-1">
                       by {videoInfo.author}
                     </p>
                   )}
-                  <p className="text-green-600 text-sm mt-2">
+                  <p className="text-green-300 text-sm mt-2">
                     Check your Downloads folder for the video file.
                   </p>
                 </div>
@@ -512,12 +512,12 @@ const Home = () => {
             )}
 
             {/* Legal Notice */}
-            <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+            <div className="mt-6 p-4 bg-amber-900/30 border border-amber-700/50 rounded-lg backdrop-blur-sm">
               <div className="flex items-center justify-center">
-                <svg className="w-5 h-5 text-amber-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 text-amber-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
-                <p className="text-amber-800 text-sm text-center">
+                <p className="text-amber-300 text-sm text-center">
                   <strong>Important:</strong> Only download content you own or have permission to use. 
                   Respect intellectual property rights and TikTok's terms of service.
                 </p>
@@ -528,13 +528,13 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Why Choose Our Downloader?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Experience the fastest and most reliable way to download TikTok videos with these amazing features.
             </p>
           </div>
@@ -548,10 +548,10 @@ const Home = () => {
               { icon: '🔒', title: 'Secure & Private', description: 'Your data is processed securely and never stored' },
               { icon: '💯', title: 'Always Free', description: 'No hidden fees, no registration required' },
             ].map((feature, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+              <div key={index} className="bg-gray-800/50 backdrop-blur-lg rounded-xl p-6 shadow-2xl hover:shadow-pink-500/10 transition-all duration-300 border border-gray-700/50">
                 <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-gray-300">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -562,10 +562,10 @@ const Home = () => {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               How It Works
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Download your favorite TikTok videos in just three simple steps.
             </p>
           </div>
@@ -577,11 +577,11 @@ const Home = () => {
               { step: '3', title: 'Save Video', description: 'The video will automatically download to your device' },
             ].map((step, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4 shadow-lg">
                   {step.step}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{step.title}</h3>
-                <p className="text-gray-600">{step.description}</p>
+                <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
+                <p className="text-gray-300">{step.description}</p>
               </div>
             ))}
           </div>

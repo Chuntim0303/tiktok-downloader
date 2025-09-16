@@ -5,52 +5,52 @@ import Home from './Home';
 // Placeholder pages
 const HowItWorks = () => (
   <div className="max-w-4xl mx-auto py-20 text-center">
-    <h2 className="text-3xl font-bold mb-4">How It Works</h2>
-    <p className="text-gray-600">Step-by-step guide coming soon...</p>
+    <h2 className="text-3xl font-bold mb-4 text-white">How It Works</h2>
+    <p className="text-gray-400">Step-by-step guide coming soon...</p>
   </div>
 );
 
 const FAQ = () => (
   <div className="max-w-4xl mx-auto py-20 text-center">
-    <h2 className="text-3xl font-bold mb-4">FAQ</h2>
-    <p className="text-gray-600">Frequently asked questions will be added here.</p>
+    <h2 className="text-3xl font-bold mb-4 text-white">FAQ</h2>
+    <p className="text-gray-400">Frequently asked questions will be added here.</p>
   </div>
 );
 
 const HelpCenter = () => (
   <div className="max-w-4xl mx-auto py-20 text-center">
-    <h2 className="text-3xl font-bold mb-4">Help Center</h2>
-    <p className="text-gray-600">Need help? Resources will be added here.</p>
+    <h2 className="text-3xl font-bold mb-4 text-white">Help Center</h2>
+    <p className="text-gray-400">Need help? Resources will be added here.</p>
   </div>
 );
 
 const Contact = () => (
   <div className="max-w-4xl mx-auto py-20 text-center">
-    <h2 className="text-3xl font-bold mb-4">Contact Us</h2>
-    <p className="text-gray-600">You can reach us at support@downloadanywhere.site</p>
+    <h2 className="text-3xl font-bold mb-4 text-white">Contact Us</h2>
+    <p className="text-gray-400">You can reach us at support@downloadanywhere.site</p>
   </div>
 );
 
 const Terms = () => (
   <div className="max-w-4xl mx-auto py-20 text-center">
-    <h2 className="text-3xl font-bold mb-4">Terms of Use</h2>
-    <p className="text-gray-600">Our terms of use will be published here.</p>
+    <h2 className="text-3xl font-bold mb-4 text-white">Terms of Use</h2>
+    <p className="text-gray-400">Our terms of use will be published here.</p>
   </div>
 );
 
 const Privacy = () => (
   <div className="max-w-4xl mx-auto py-20 text-center">
-    <h2 className="text-3xl font-bold mb-4">Privacy Policy</h2>
-    <p className="text-gray-600">Our privacy policy will be published here.</p>
+    <h2 className="text-3xl font-bold mb-4 text-white">Privacy Policy</h2>
+    <p className="text-gray-400">Our privacy policy will be published here.</p>
   </div>
 );
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
         {/* Header */}
-        <header className="bg-white shadow-sm border-b border-gray-100">
+        <header className="bg-gray-900/90 backdrop-blur-md shadow-2xl border-b border-gray-700/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
@@ -58,9 +58,8 @@ function App() {
                 <img 
                   src="/logo.png" 
                   alt="Download Anywhere Logo" 
-                  className="h-10 w-auto"
+                  className="h-10 w-auto rounded-lg"
                   onError={(e) => {
-                    // Fallback to gradient icon if logo.png doesn't exist yet
                     e.target.style.display = 'none';
                     e.target.nextElementSibling.style.display = 'flex';
                   }}
@@ -73,19 +72,19 @@ function App() {
                 </div>
                 
                 <div className="flex flex-col">
-                  <h1 className="text-xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                  <h1 className="text-xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
                     Download Anywhere
                   </h1>
-                  <span className="text-xs text-gray-500 font-medium">
+                  <span className="text-xs text-gray-400 font-medium">
                     TikTok Downloader
                   </span>
                 </div>
               </Link>
               
               <nav className="hidden md:flex space-x-8">
-                <Link to="/" className="text-gray-600 hover:text-pink-600 transition-colors font-medium">Home</Link>
-                <Link to="/how-it-works" className="text-gray-600 hover:text-pink-600 transition-colors font-medium">How it Works</Link>
-                <Link to="/faq" className="text-gray-600 hover:text-pink-600 transition-colors font-medium">FAQ</Link>
+                <Link to="/" className="text-gray-300 hover:text-pink-400 transition-colors font-medium">Home</Link>
+                <Link to="/how-it-works" className="text-gray-300 hover:text-pink-400 transition-colors font-medium">How it Works</Link>
+                <Link to="/faq" className="text-gray-300 hover:text-pink-400 transition-colors font-medium">FAQ</Link>
               </nav>
             </div>
           </div>
@@ -105,7 +104,7 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-gray-50 border-t border-gray-200 mt-16">
+        <footer className="bg-gray-900/50 backdrop-blur-md border-t border-gray-700/50 mt-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="col-span-1 md:col-span-2">
@@ -114,9 +113,8 @@ function App() {
                   <img 
                     src="/logo.png" 
                     alt="Download Anywhere Logo" 
-                    className="h-8 w-auto"
+                    className="h-8 w-auto rounded-md"
                     onError={(e) => {
-                      // Fallback to gradient icon if logo.png doesn't exist yet
                       e.target.style.display = 'none';
                       e.target.nextElementSibling.style.display = 'flex';
                     }}
@@ -129,23 +127,23 @@ function App() {
                   </div>
                   
                   <div>
-                    <h2 className="text-xl font-bold text-gray-900">Download Anywhere</h2>
-                    <p className="text-sm text-gray-600">TikTok Video Downloader</p>
+                    <h2 className="text-xl font-bold text-white">Download Anywhere</h2>
+                    <p className="text-sm text-gray-400">TikTok Video Downloader</p>
                   </div>
                 </div>
-                <p className="text-gray-600 mb-4 max-w-md">
+                <p className="text-gray-400 mb-4 max-w-md">
                   Download TikTok videos quickly and easily. Always respect content creators' rights and use downloaded content responsibly.
                 </p>
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                  <p className="text-amber-800 text-sm">
+                <div className="bg-amber-900/30 border border-amber-700/50 rounded-lg p-4 backdrop-blur-sm">
+                  <p className="text-amber-300 text-sm">
                     <strong>Important:</strong> Only download content you have permission to use. Respect copyright and creator rights.
                   </p>
                 </div>
               </div>
               
               <div>
-                <h3 className="font-semibold text-gray-900 mb-4">Features</h3>
-                <ul className="space-y-2 text-sm text-gray-600">
+                <h3 className="font-semibold text-white mb-4">Features</h3>
+                <ul className="space-y-2 text-sm text-gray-400">
                   <li>• Fast downloads</li>
                   <li>• High quality videos</li>
                   <li>• No watermark option</li>
@@ -156,14 +154,14 @@ function App() {
               </div>
               
               <div>
-                <h3 className="font-semibold text-gray-900 mb-4">Support</h3>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li><Link to="/help" className="hover:text-pink-600 transition-colors">Help Center</Link></li>
-                  <li><Link to="/contact" className="hover:text-pink-600 transition-colors">Contact Us</Link></li>
-                  <li><Link to="/terms" className="hover:text-pink-600 transition-colors">Terms of Use</Link></li>
-                  <li><Link to="/privacy" className="hover:text-pink-600 transition-colors">Privacy Policy</Link></li>
+                <h3 className="font-semibold text-white mb-4">Support</h3>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  <li><Link to="/help" className="hover:text-pink-400 transition-colors">Help Center</Link></li>
+                  <li><Link to="/contact" className="hover:text-pink-400 transition-colors">Contact Us</Link></li>
+                  <li><Link to="/terms" className="hover:text-pink-400 transition-colors">Terms of Use</Link></li>
+                  <li><Link to="/privacy" className="hover:text-pink-400 transition-colors">Privacy Policy</Link></li>
                 </ul>
-                <div className="mt-4 pt-4 border-t border-gray-200">
+                <div className="mt-4 pt-4 border-t border-gray-700">
                   <p className="text-xs text-gray-500">
                     <strong>Email:</strong> support@downloadanywhere.site
                   </p>
@@ -171,10 +169,10 @@ function App() {
               </div>
             </div>
             
-            <div className="border-t border-gray-200 mt-8 pt-8 text-center text-sm text-gray-600">
+            <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
               <p>&copy; 2025 Download Anywhere. All rights reserved. Not affiliated with TikTok.</p>
               <p className="mt-1 text-xs">
-                <span className="font-medium">downloadanywhere.site</span> - Free TikTok Video Downloader
+                <span className="font-medium text-gray-300">downloadanywhere.site</span> - Free TikTok Video Downloader
               </p>
             </div>
           </div>
